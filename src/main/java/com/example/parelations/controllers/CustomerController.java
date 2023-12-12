@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,6 +24,11 @@ public class CustomerController {
     @GetMapping(value = "customers", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Customer> getCustomersForHomePage() {
         return customerRepository.findAll();
+    }
+
+    @GetMapping(value = "customers/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Customer getCustomerById(@PathVariable Integer id) {
+        return customerRepository.findById(id).orElse(null);
     }
 
 }
