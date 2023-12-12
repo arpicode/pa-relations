@@ -20,109 +20,102 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DataLoader {
 
-    private final CustomerRepository customerRepository;
-    private final BillingEntityRepository billingEntityRepository;
-    private final ServiceRepository serviceRepository;
+        private final CustomerRepository customerRepository;
+        private final BillingEntityRepository billingEntityRepository;
+        private final ServiceRepository serviceRepository;
 
-    @Bean
-    @Transactional
-    CommandLineRunner loadData() {
-        return args -> {
-            createAlphabetCustomer();
-            createAppleCustomer();
-        };
-    }
+        @Bean
+        @Transactional
+        CommandLineRunner loadData() {
+                return args -> {
+                        createAlphabetCustomer();
+                        createAppleCustomer();
+                };
+        }
 
-    private void createAlphabetCustomer() {
-        Customer customer = Customer.builder()
-                .commercialName("Alphabet Inc.")
-                .build();
+        private void createAlphabetCustomer() {
+                Customer customer = Customer.builder()
+                                .commercialName("Alphabet Inc.")
+                                .build();
 
-        BillingEntity billingEntity1 = BillingEntity.builder()
-                .name("Google Cloud Platform")
-                .customer(customer)
-                .build();
+                BillingEntity billingEntity1 = BillingEntity.builder()
+                                .name("Google Cloud Platform")
+                                .customer(customer)
+                                .build();
 
-        BillingEntity billingEntity2 = BillingEntity.builder()
-                .name("Google Workspace")
-                .customer(customer)
-                .build();
+                BillingEntity billingEntity2 = BillingEntity.builder()
+                                .name("Google Workspace")
+                                .customer(customer)
+                                .build();
 
-        customer.setBillingEntities(List.of(billingEntity1, billingEntity2));
+                customer.setBillingEntities(List.of(billingEntity1, billingEntity2));
 
-        Service service1 = Service.builder()
-                .name("Compute Engine")
-                .billingEntity(billingEntity1)
-                .customer(customer)
-                .build();
+                Service service1 = Service.builder()
+                                .name("Compute Engine")
+                                .billingEntity(billingEntity1)
+                                .build();
 
-        Service service2 = Service.builder()
-                .name("Cloud Storage")
-                .billingEntity(billingEntity1)
-                .customer(customer)
-                .build();
+                Service service2 = Service.builder()
+                                .name("Cloud Storage")
+                                .billingEntity(billingEntity1)
+                                .build();
 
-        Service service3 = Service.builder()
-                .name("Gmail")
-                .billingEntity(billingEntity2)
-                .customer(customer)
-                .build();
+                Service service3 = Service.builder()
+                                .name("Gmail")
+                                .billingEntity(billingEntity2)
+                                .build();
 
-        Service service4 = Service.builder()
-                .name("Google Drive")
-                .billingEntity(billingEntity2)
-                .customer(customer)
-                .build();
+                Service service4 = Service.builder()
+                                .name("Google Drive")
+                                .billingEntity(billingEntity2)
+                                .build();
 
-        billingEntity1.setServices(List.of(service1, service2));
-        billingEntity2.setServices(List.of(service3, service4));
+                billingEntity1.setServices(List.of(service1, service2));
+                billingEntity2.setServices(List.of(service3, service4));
 
-        customerRepository.save(customer);
-        billingEntityRepository.saveAll(List.of(billingEntity1, billingEntity2));
-        serviceRepository.saveAll(List.of(service1, service2, service3, service4));
-    }
+                customerRepository.save(customer);
+                billingEntityRepository.saveAll(List.of(billingEntity1, billingEntity2));
+                serviceRepository.saveAll(List.of(service1, service2, service3, service4));
+        }
 
-    private void createAppleCustomer() {
-        Customer customer = Customer.builder()
-                .commercialName("Apple Inc.")
-                .build();
+        private void createAppleCustomer() {
+                Customer customer = Customer.builder()
+                                .commercialName("Apple Inc.")
+                                .build();
 
-        BillingEntity billingEntity1 = BillingEntity.builder()
-                .name("Apple Cloud")
-                .customer(customer)
-                .build();
+                BillingEntity billingEntity1 = BillingEntity.builder()
+                                .name("Apple Cloud")
+                                .customer(customer)
+                                .build();
 
-        BillingEntity billingEntity2 = BillingEntity.builder()
-                .name("Apple Music")
-                .customer(customer)
-                .build();
+                BillingEntity billingEntity2 = BillingEntity.builder()
+                                .name("Apple Music")
+                                .customer(customer)
+                                .build();
 
-        customer.setBillingEntities(List.of(billingEntity1, billingEntity2));
+                customer.setBillingEntities(List.of(billingEntity1, billingEntity2));
 
-        Service service1 = Service.builder()
-                .name("iCloud")
-                .billingEntity(billingEntity1)
-                .customer(customer)
-                .build();
+                Service service1 = Service.builder()
+                                .name("iCloud")
+                                .billingEntity(billingEntity1)
+                                .build();
 
-        Service service2 = Service.builder()
-                .name("Apple Arcade")
-                .billingEntity(billingEntity1)
-                .customer(customer)
-                .build();
+                Service service2 = Service.builder()
+                                .name("Apple Arcade")
+                                .billingEntity(billingEntity1)
+                                .build();
 
-        Service service3 = Service.builder()
-                .name("Apple Music")
-                .billingEntity(billingEntity2)
-                .customer(customer)
-                .build();
+                Service service3 = Service.builder()
+                                .name("Apple Music")
+                                .billingEntity(billingEntity2)
+                                .build();
 
-        billingEntity1.setServices(List.of(service1, service2));
-        billingEntity2.setServices(List.of(service3));
+                billingEntity1.setServices(List.of(service1, service2));
+                billingEntity2.setServices(List.of(service3));
 
-        customerRepository.save(customer);
-        billingEntityRepository.saveAll(List.of(billingEntity1, billingEntity2));
-        serviceRepository.saveAll(List.of(service1, service2, service3));
-    }
+                customerRepository.save(customer);
+                billingEntityRepository.saveAll(List.of(billingEntity1, billingEntity2));
+                serviceRepository.saveAll(List.of(service1, service2, service3));
+        }
 
 }

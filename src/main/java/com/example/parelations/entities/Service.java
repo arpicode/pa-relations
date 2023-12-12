@@ -1,6 +1,6 @@
 package com.example.parelations.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,12 +28,7 @@ public class Service {
 
     @ManyToOne
     @JoinColumn(name = "billing_entity_id")
-    @JsonManagedReference
+    @JsonBackReference
     private BillingEntity billingEntity;
-
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    @JsonManagedReference
-    private Customer customer;
 
 }

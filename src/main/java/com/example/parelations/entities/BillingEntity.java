@@ -2,7 +2,10 @@ package com.example.parelations.entities;
 
 import java.util.List;
 
+import com.example.parelations.views.Views;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -26,17 +29,19 @@ public class BillingEntity {
 
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView({ Views.Customer.DetailsPage.class })
     private Integer id;
 
+    @JsonView({ Views.Customer.DetailsPage.class })
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id") // optional
     @JsonBackReference
     private Customer customer;
 
     @OneToMany(mappedBy = "billingEntity", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     private List<Service> services;
 
 }

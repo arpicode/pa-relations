@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping
 public class ServiceController {
 
     private final ServiceRepository serviceRepository;
 
-    @GetMapping(value = "services", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/services", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Service> getServicesWithCustomerAndBillingEntity() {
         return serviceRepository.findAll();
     }
